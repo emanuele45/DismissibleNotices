@@ -68,7 +68,7 @@ class Dismissible_Notices
 		return $notice;
 	}
 
-	public function disableNotice($id_notice, $id_member)
+	public function disableMemberNotice($id_notice, $id_member)
 	{
 		$this->_db->insert('ignore',
 			'{db_prefix}log_notices',

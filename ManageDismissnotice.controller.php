@@ -149,6 +149,7 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 			),
 		);
 
+		require_once(SUBSDIR . '/GenericList.class.php');
 		createList($list_options);
 	}
 
