@@ -204,7 +204,7 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		$notice = new Dismissible_Notices();
 
 		$dismissnotice_data = $notice->getNoticeById($id_notice);
-		$selected_groups = explode(',', $dismissnotice_data['show_to']);
+		$selected_groups = json_decode($dismissnotice_data['show_to']);
 
 		$context['default_groups_list'] = $this->populateGroupList($selected_groups);
 
@@ -308,7 +308,7 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		$body = isset($_REQUEST['body']) ? Util::htmlspecialchars($_REQUEST['body']) : '';
 		$class = isset($_REQUEST['class']) ? Util::htmlspecialchars($_REQUEST['class']) : 'success';
 		preparsecode($body);
-		$groups = implode(',', array_map('intval', array_keys($_POST['default_groups_list'])));
+		$groups = json_encode(array_map('intval', array_keys($_POST['default_groups_list'])));
 
 		require_once(SUBSDIR . '/DismissibleNotices.class.php');
 		$notice = new Dismissible_Notices();
