@@ -94,14 +94,20 @@ function template_dismissnotice_ajax_edit()
 	}
 	echo '
 		$(function() {
-			$("#expire").datepicker({
+			var $expire = $("#expire");
+
+			$expire.datepicker({
 				altField: \'#expire_alt\',
 				altFormat: \'yy-mm-dd\'
-			}).val(
-				$.datepicker.formatDate(
-					$("#expire").datepicker("option", "dateFormat"),
-					new Date($("#expire").val() * 1000)
-			));
+			});
+			if ($expire.val() != 0)
+			{
+				$expire.val(
+					$.datepicker.formatDate(
+						$("#expire").datepicker("option", "dateFormat"),
+						new Date($("#expire").val() * 1000)
+				));
+			}
 		});
 	</script>';
 }
