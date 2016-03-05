@@ -36,6 +36,7 @@ class Dismissible_Notices
 		while ($row = $this->_db->fetch_assoc($request))
 		{
 			$show = explode(',', $row['show_to']);
+
 			foreach ($groups as $group)
 			{
 				if (in_array($group, $show))
