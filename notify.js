@@ -644,7 +644,7 @@ function dismissnotice_editable()
 		$new_r.append($('<td />').html(request.added));
 		$new_r.append($('<td />').html(request.body));
 		$new_r.append($('<td />').html(request.class));
-		$new_r.append($('<td />').html(request.expire));
+		$new_r.append($('<td />').html(request.expire == 0 ? '' : request.expire));
 		$new_r.append($('<td />').html(request.edit));
 
 		return $new_r;
@@ -654,6 +654,12 @@ function dismissnotice_editable()
 	{
 		var $popup = $('<tr />').append($('<td />').attr('colspan', 5).html(request));
 		$popup.hide();
+		$popup.find('#expire').each(function() {
+			if ($(this).val() == 0)
+			{
+				$(this).val('');
+			}
+		});
 		$row.after($popup);
 		$popup.slideDown();
 
