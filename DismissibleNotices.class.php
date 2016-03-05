@@ -25,7 +25,7 @@ class Dismissible_Notices
 			FROM {db_prefix}notices AS n
 				LEFT JOIN {db_prefix}log_notices AS ln ON (ln.id_notice = n.id_notice AND ln.id_member = {int:current_member})
 			WHERE ln.dismissed IS NULL
-				AND (n.expire = 0 OR n.expire < {int:time})',
+				AND (n.expire = 0 OR n.expire > {int:time})',
 			array(
 				'current_member' => $id_member,
 				'time' => forum_time(false),
