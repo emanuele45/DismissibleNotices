@@ -48,13 +48,19 @@ class Dismissible_Notices_Integrate
 
 	protected static function buildTemplate($notices)
 	{
-		global $context;
+		global $context, $user_info;
 
 		loadTemplate('DismissibleNotices');
 		loadLanguage('DismissibleNotices');
 		Template_Layers::getInstance()->addAfter('notices', 'body');
 		loadJavascriptFile('notify.js', array('defer' => true));
 		loadCSSFile('notify.css');
+
+		foreach ($notices as $key => $notice)
+		{
+			$notice['body'] = str_replace('{username}', $user_info['name'], $notice['body']);
+			$context['notices'][$key] = $notice;
+		}
 
 		$context['notices'] = $notices;
 	}

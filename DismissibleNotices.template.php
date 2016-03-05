@@ -65,6 +65,7 @@ function template_dismissnotice_ajax_edit()
 			</dd>
 			<dt>
 				<strong><label for="body">' . $txt['dismissnotices_body'] . '</label></strong>
+				<div class="description">' . $txt['dismissnotices_body_description'] . '</div>
 			</dt>
 			<dd>
 				<textarea rows="7" id="body" name="body">' . $context['dismissnotice_data']['body'] . '</textarea>

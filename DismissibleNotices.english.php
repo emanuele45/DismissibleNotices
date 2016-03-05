@@ -10,6 +10,7 @@ $txt['dismissnotices_title_save'] = 'Save dismissible notice';
 
 $txt['dismissnotices_time_added'] = 'Created on';
 $txt['dismissnotices_body'] = 'Text';
+$txt['dismissnotices_body_description'] = 'Possible replacements:<ul><li>{user_name}</li></ul>';
 $txt['dismissnotices_class'] = 'Style';
 $txt['dismissnotices_expire'] = 'Expiry date';
 
