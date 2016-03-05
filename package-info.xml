@@ -26,6 +26,7 @@
 		<require-file name="notify.css" destination="THEMEDIR/css" />
 		<require-dir name="dism" destination="THEMEDIR/css" />
 		<require-dir name="datepicker-i18n" destination="THEMEDIR/scripts" />
+		<require-file name="jquery.knob.js" destination="THEMEDIR/scripts" />
 		<database>install.php</database>
 	</install>
 	<uninstall for="1.0.5 - 1.0.99">
@@ -37,8 +38,9 @@
 		<remove-file name="LANGUAGEDIR/english/DismissibleNotices.english.php" />
 		<remove-file name="THEMEDIR/scripts/notify.js" />
 		<remove-file name="THEMEDIR/css/notify.css" />
-		<remove-dir name="THEMEDIR/dism" />
-		<remove-dir name="THEMEDIR/datepicker-i18n" />
+		<remove-dir name="THEMEDIR/css/dism" />
+		<remove-dir name="THEMEDIR/scripts/datepicker-i18n" />
+		<remove-file name="THEMEDIR/scripts/jquery.knob.js" />
 		<code>install.php</code>
 	</uninstall>
 </package-info>

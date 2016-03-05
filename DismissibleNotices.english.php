@@ -13,6 +13,10 @@ $txt['dismissnotices_body'] = 'Text';
 $txt['dismissnotices_body_description'] = 'Possible replacements:<ul><li>{user_name}</li></ul>';
 $txt['dismissnotices_class'] = 'Style';
 $txt['dismissnotices_expire'] = 'Expiry date';
+$txt['dismissnotices_positioning'] = 'Positioning';
+$txt['dismissnotices_pos_element'] = 'Element';
+$txt['dismissnotices_pos_global'] = 'Global';
+$txt['dismissnotices_pos_class'] = 'Class name:';
 
 $txt['dismissnotices_groups_show_notice'] = 'Select the groups to display the notice to';
 $txt['cancel'] = 'Cancel';

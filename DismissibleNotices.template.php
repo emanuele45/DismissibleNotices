@@ -77,6 +77,23 @@ function template_dismissnotice_ajax_edit()
 			<dd>
 				<input type="text" value="' . $context['dismissnotice_data']['class'] . '" id="class" name="class" />
 			</dd>
+			<dt>
+				<strong><label for="class">' . $txt['dismissnotices_positioning'] . '</label></strong>
+			</dt>
+			<dd>
+				<div>
+					<label for="element">' . $txt['dismissnotices_pos_element'] . '</label>
+					<input type="radio" id="element" value="element" name="positioning" ' . $context['dismissnotice_data']['element'] . ' />
+					<label for="global">' . $txt['dismissnotices_pos_global'] . '</label>
+					<input type="radio" id="global" value="global" name="positioning" ' . $context['dismissnotice_data']['global'] . ' /><br />
+					<label for="element_name">' . $txt['dismissnotices_pos_class'] . '</label>
+					<input type="text" value="' . $context['dismissnotice_data']['element_name'] . '" id="element_name" name="element_name" />
+				</div>
+
+				<div style="margin-left: 60px">
+					<input type="text" value="' . $context['dismissnotice_data']['position'] . '" id="position" name="position" data-thickness=".3" data-width="100" data-height="100" data-max="8" data-cursor="true" data-bgColor="#fff" data-fgColor="#080" data-displayInput="false" data-angleOffset="0" data-linecap="round" />
+        </div>
+			</dd>
 		</dl>
 		<button id="dismissnotice_submit">' . $txt['save'] . '</button>
 		<button id="dismissnotice_cancel">' . $txt['cancel'] . '</button>
@@ -111,6 +128,8 @@ function template_dismissnotice_ajax_edit()
 						new Date($("#expire").val() * 1000)
 				));
 			}
+
+			$(\'#position\').knob();
 		});
 	</script>';
 }

@@ -683,8 +683,18 @@ function dismissnotice_editable()
 							inputs[$elem.attr('name')] = 'on';
 						}
 					}
+					else if ($elem.is(':radio'))
+					{
+						if (value.checked)
+						{
+							inputs[$elem.attr('name')] = $elem.val();
+						}
+					}
 					else
-						inputs[$elem.attr('name')] = $elem.val();
+					{
+						var val = $elem.val();
+						inputs[$elem.attr('name')] = typeof val == 'undefined' ? '\'\'' : val;
+					}
 				});
 				$.ajax({
 					url: elk_scripturl + '?action=admin;area=news;sa=notices;save;idnotice=' + id + ';' + elk_session_var + '=' + elk_session_id + ';api;xml',

@@ -121,6 +121,12 @@ function setup_hooks ()
 					'size' => 150,
 					'default' => ''
 				),
+				array(
+					'name' => 'positioning',
+					'type' => 'varchar',
+					'size' => 255,
+					'default' => ''
+				),
 			),
 			array(
 				array(

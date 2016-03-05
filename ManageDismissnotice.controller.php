@@ -40,6 +40,7 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		global $txt, $context, $scripturl, $modSettings, $settings;
 
 		loadJavascriptFile('notify.js', array('defer' => true));
+		loadJavascriptFile('jquery.knob.js', array('defer' => true));
 		loadCSSFile('notify.css');
 		addInlineJavascript('dismissnotice_editable();', true);
 		$modSettings['jquery_include_ui'] = true;
@@ -184,6 +185,10 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 			'expire' => 0,
 			'body' => '',
 			'class' => 'success',
+			'element' => '',
+			'position' => 0,
+			'element_name' => 'success',
+			'global' => 'checked="checked"',
 			'groups' => array(),
 		);
 	}
@@ -213,8 +218,24 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 			'expire' => $dismissnotice_data['expire'],
 			'body' => un_preparsecode($dismissnotice_data['body']),
 			'class' => $dismissnotice_data['class'],
+			'element' => $this->positionChecked('element', $dismissnotice_data['positioning']['element']),
+			'position' => $dismissnotice_data['positioning']['position'],
+			'element_name' => $dismissnotice_data['positioning']['element_name'],
+			'global' => $this->positionChecked('global', $dismissnotice_data['positioning']['element']),
 			'groups' => $selected_groups,
 		);
+	}
+
+	protected function positionChecked($position, $test)
+	{
+		if ($position == $test)
+		{
+			return 'checked="checked"';
+		}
+		else
+		{
+			return '';
+		}
 	}
 
 	public function action_reset()
@@ -291,6 +312,18 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		);
 	}
 
+	protected function validPositioning($position)
+	{
+		switch ($position)
+		{
+			case 'element':
+			case 'global':
+				return $position;
+			default:
+				return 'global';
+		}
+	}
+
 	public function action_save()
 	{
 		global $context, $txt;
@@ -298,9 +331,21 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		require_once(SUBSDIR . '/Post.subs.php');
 
 		if (empty($_POST['expire_alt']))
+		{
 			$expire = strtotime($_POST['expire']);
+		}
 		else
-			$expire = strtotime($_POST['expire_alt']);
+		{
+			// This is the case date-picker doesn't kick in and the format is still an unix timestamp
+			if (is_numeric($_POST['expire_alt']))
+			{
+				$expire = $_POST['expire_alt'];
+			}
+			else
+			{
+				$expire = strtotime($_POST['expire_alt']);
+			}
+		}
 
 		$expire = (int) $expire;
 
@@ -310,9 +355,15 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		preparsecode($body);
 		$groups = json_encode(array_map('intval', array_keys($_POST['default_groups_list'])));
 
+		$positioning = array(
+			'element' => $this->validPositioning(isset($_REQUEST['positioning']) ? $_REQUEST['positioning'] : null),
+			'element_name' => isset($_REQUEST['element_name']) ? Util::htmlspecialchars($_REQUEST['element_name']) : '',
+			'position' => isset($_REQUEST['position']) ? (int) $_REQUEST['position'] : 0,
+		);
+
 		require_once(SUBSDIR . '/DismissibleNotices.class.php');
 		$notice = new Dismissible_Notices();
-		$new = $notice->save($id, $expire, $body, $class, $groups);
+		$new = $notice->save($id, $expire, $body, $class, $groups, $positioning);
 
 		loadTemplate('Json');
 		$context['sub_template'] = 'send_json';
