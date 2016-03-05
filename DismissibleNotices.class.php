@@ -40,6 +40,7 @@ class Dismissible_Notices
 			{
 				if (in_array($group, $show))
 				{
+					$row['body'] = parse_bbc($row['body']);
 					$notices[] = $row;
 					break;
 				}
