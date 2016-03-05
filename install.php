@@ -77,6 +77,99 @@ function setup_hooks ()
 		$integration_function($hook, $class . '::' . $hook, $file);
 	}
 
+	if (empty($context['uninstalling']))
+	{
+		$db_table = db_table();
+
+		$db_table->db_create_table(
+			'{db_prefix}notices', 
+			array(
+				array(
+					'name' => 'id_notice',
+					'type' => 'int',
+					'unsigned' => true,
+					'size' => 10,
+					'autoincrement' => true,
+				),
+				array(
+					'name' => 'body',
+					'type' => 'text',
+				),
+				array(
+					'name' => 'class',
+					'type' => 'varchar',
+					'size' => 50,
+					'default' => ''
+				),
+				array(
+					'name' => 'expire',
+					'type' => 'int',
+					'unsigned' => true,
+					'size' => 10,
+					'default' => 0
+				),
+				array(
+					'name' => 'added',
+					'type' => 'int',
+					'unsigned' => true,
+					'size' => 10,
+					'default' => 0
+				),
+				array(
+					'name' => 'show_to',
+					'type' => 'varchar',
+					'size' => 150,
+					'default' => ''
+				),
+			),
+			array(
+				array(
+					'name' => 'id_notice',
+					'type' => 'primary',
+					'columns' => array('id_notice'),
+				),
+				array(
+					'name' => 'expire',
+					'type' => 'key',
+					'columns' => array('expire'),
+				),
+			)
+		);
+
+		$db_table->db_create_table(
+			'{db_prefix}log_notices', 
+			array(
+				array(
+					'name' => 'id_notice',
+					'type' => 'int',
+					'unsigned' => true,
+					'size' => 10,
+					'default' => 0
+				),
+				array(
+					'name' => 'id_member',
+					'type' => 'mediumint',
+					'unsigned' => true,
+					'size' => 10,
+					'default' => 0
+				),
+				array(
+					'name' => 'dismissed',
+					'type' => 'tinyint',
+					'size' => 10,
+					'default' => 0
+				),
+			),
+			array(
+				array(
+					'name' => 'dismissed_notices',
+					'type' => 'key',
+					'columns' => array('id_member', 'dismissed'),
+				),
+			)
+		);
+	}
+
 	$context['installation_done'] = true;
 }
 
