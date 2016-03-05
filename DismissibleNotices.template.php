@@ -21,7 +21,7 @@ function template_notices_above()
 	{
 		addInlineJavascript('
 		setTimeout(function() {
-			$.notify({
+			$' . ($notice['positioning']['element'] !== 'global' && !empty($notice['positioning']['element_name']) ? '(".' . $notice['positioning']['element_name'] . '")' : '') . '.notify({
 				title: ' . JavaScriptEscape($notice['body']) . ',
 				button: ' . JavaScriptEscape($txt['dismiss_notice_dismis']) . ',
 				cancel: ' . JavaScriptEscape($txt['dismiss_notice_cancel']) . ',
@@ -30,6 +30,7 @@ function template_notices_above()
 				style: \'foo\',
 				className:  ' . javaScriptEscape($notice['class']) . ',
 				autoHide: ' . ($context['user']['is_guest'] ? 'true' : 'false') . ',
+				position: ' . javaScriptEscape(dismissnotices_translate_positions($notice['positioning']['position'])) . ',
 				clickToHide: false
 			});
 		}, 500);', true);
@@ -42,6 +43,31 @@ function template_notices_above()
 	echo '
 		</div>
 	</noscript>';
+}
+
+function dismissnotices_translate_positions($position)
+{
+	switch ($position)
+	{
+		case 0:
+			return 'top center';
+		case 1:
+			return 'top right';
+		case 2:
+			return 'right middle';
+		case 3:
+			return 'bottom right';
+		case 4:
+			return 'bottom center';
+		case 5:
+			return 'bottom left';
+		case 6:
+			return 'left middle';
+		case 7:
+			return 'top left';
+		default:
+			return 'top center';
+	}
 }
 
 function template_dismissnotice_ajax_edit()

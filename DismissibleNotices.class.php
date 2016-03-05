@@ -21,7 +21,7 @@ class Dismissible_Notices
 	public function getMemberNotices($id_member, $groups)
 	{
 		$request = $this->_db->query('', '
-			SELECT n.id_notice, n.body, n.class, n.expire, n.show_to
+			SELECT n.id_notice, n.body, n.class, n.expire, n.show_to, n.positioning
 			FROM {db_prefix}notices AS n
 				LEFT JOIN {db_prefix}log_notices AS ln ON (ln.id_notice = n.id_notice AND ln.id_member = {int:current_member})
 			WHERE ln.dismissed IS NULL
@@ -35,12 +35,27 @@ class Dismissible_Notices
 		$notices = array();
 		while ($row = $this->_db->fetch_assoc($request))
 		{
-			$show = json_decode($row['show_to']);
+			$show = (array) json_decode($row['show_to']);
 
 			foreach ($groups as $group)
 			{
 				if (in_array($group, $show))
 				{
+					$row['positioning'] = (array) json_decode($row['positioning']);
+
+					if (empty($row['positioning']['element']))
+					{
+						$row['positioning']['element'] = 'global';
+					}
+					if (empty($row['positioning']['position']))
+					{
+						$row['positioning']['position'] = 0;
+					}
+					if (empty($row['positioning']['element_name']))
+					{
+						$row['positioning']['element_name'] = '';
+					}
+
 					$row['body'] = parse_bbc($row['body']);
 					$notices[] = $row;
 					break;

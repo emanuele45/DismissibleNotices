@@ -209,7 +209,7 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		$notice = new Dismissible_Notices();
 
 		$dismissnotice_data = $notice->getNoticeById($id_notice);
-		$selected_groups = json_decode($dismissnotice_data['show_to']);
+		$selected_groups = (array) json_decode($dismissnotice_data['show_to']);
 
 		$context['default_groups_list'] = $this->populateGroupList($selected_groups);
 
