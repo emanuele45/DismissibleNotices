@@ -78,7 +78,8 @@ function template_dismissnotice_ajax_edit()
 			</dd>
 		</dl>
 		<button id="dismissnotice_submit">' . $txt['save'] . '</button>
-		<button id="dismissnotice_cancel">' . $txt['cancel'] . '</button>';
+		<button id="dismissnotice_cancel">' . $txt['cancel'] . '</button>
+		<button id="dismissnotice_reset">' . $txt['reset'] . '</button>';
 	template_list_groups_collapsible();
 	echo '
 	</div>

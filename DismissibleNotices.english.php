@@ -16,3 +16,7 @@ $txt['dismissnotices_expire'] = 'Expiry date';
 
 $txt['dismissnotices_groups_show_notice'] = 'Select the groups to display the notice to';
 $txt['cancel'] = 'Cancel';
+$txt['reset'] = 'Reset all users dismiss state';
+
+$txt['dismissnotices_no_notice'] = 'No notice was selected, impossible to reset.';
+$txt['dismissnotices_notice_reset'] = 'The notice was reset, it will show up to all users again.';

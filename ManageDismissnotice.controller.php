@@ -31,6 +31,8 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 			return $this->action_save();
 		elseif (isset($_GET['new']))
 			return $this->action_new();
+		elseif (isset($_GET['reset']))
+			return $this->action_reset();
 	}
 
 	public function action_list()
@@ -215,6 +217,32 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		);
 	}
 
+	public function action_reset()
+	{
+		global $txt, $context;
+
+		$id = isset($_REQUEST['idnotice']) ? (int) $_REQUEST['idnotice'] : 0;
+
+		loadTemplate('Json');
+		$context['sub_template'] = 'send_json';
+
+		if (empty($id))
+		{
+			$context['json_data'] = array(
+				'error' => $txt['dismissnotices_no_notice'],
+			);
+			return;
+		}
+
+		require_once(SUBSDIR . '/DismissibleNotices.class.php');
+		$notice = new Dismissible_Notices();
+		$new = $notice->reset($id);
+
+		$context['json_data'] = array(
+			'success' => $txt['dismissnotices_notice_reset'],
+		);
+	}
+
 	protected function populateGroupList($selected_groups)
 	{
 		global $txt;
@@ -269,15 +297,14 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 
 		require_once(SUBSDIR . '/Post.subs.php');
 
-	if (empty($_POST['expire_alt']))
-		$expire = strtotime($_POST['expire']);
-	else
-		$expire = strtotime($_POST['expire_alt']);
+		if (empty($_POST['expire_alt']))
+			$expire = strtotime($_POST['expire']);
+		else
+			$expire = strtotime($_POST['expire_alt']);
 
-	$expire = (int) $expire;
+		$expire = (int) $expire;
 
 		$id = isset($_REQUEST['idnotice']) ? (int) $_REQUEST['idnotice'] : 0;
-// 		$expire = isset($_REQUEST['expire']) ? (int) $_REQUEST['expire'] : 0;
 		$body = isset($_REQUEST['body']) ? Util::htmlspecialchars($_REQUEST['body']) : '';
 		$class = isset($_REQUEST['class']) ? Util::htmlspecialchars($_REQUEST['class']) : 'success';
 		preparsecode($body);

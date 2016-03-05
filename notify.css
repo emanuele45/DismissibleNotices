@@ -37,7 +37,10 @@
 
 #dismissnotice_box button {
 	display: inline-block;
-	width: 49%;
 	padding: 0;
 	margin: 0;
+}
+
+#dismissnotice_cancel.grid50 {
+	display: none;
 }

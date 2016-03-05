@@ -608,7 +608,7 @@ function dismissnotice_editable()
 				$row.replaceWith($new_r);
 			}, function() {
 				$modify.data('state', 'closed');
-			});
+			}, true);
 		})
 		.always(function() {
 			ajax_indicator(false);
@@ -650,9 +650,10 @@ function dismissnotice_editable()
 		return $new_r;
 	}
 
-	function create_popup($row, id, request, done_callback, cancel_callback)
+	function create_popup($row, id, request, done_callback, cancel_callback, show_reset)
 	{
-		var $popup = $('<tr />').append($('<td />').attr('colspan', 5).html(request));
+		var $popup = $('<tr />').append($('<td />').attr('colspan', 5).html(request)),
+			width_class = 'grid50';
 		$popup.hide();
 		$popup.find('#expire').each(function() {
 			if ($(this).val() == 0)
@@ -663,6 +664,12 @@ function dismissnotice_editable()
 		$row.after($popup);
 		$popup.slideDown();
 
+		if (typeof show_reset != 'undefined' && show_reset == true)
+		{
+			width_class = 'grid33';
+		}
+
+		$('#dismissnotice_reset').addClass(width_class)
 		$('#dismissnotice_submit').click(function(){
 				var $form = $(this).closest('#dismissnotice_box'),
 					inputs = {};
@@ -698,7 +705,8 @@ function dismissnotice_editable()
 				.always(function() {
 					ajax_indicator(false);
 				});
-		});
+		}).addClass(width_class);
+
 		$('#dismissnotice_cancel').on('click', function(e) {
 			$popup.slideUp(function() {
 				if (typeof cancel_callback != 'undefined') {
@@ -707,6 +715,31 @@ function dismissnotice_editable()
 
 				$(this).remove();
 			});
-		});
+		}).addClass(width_class);
+
+		$('#dismissnotice_reset').on('click', function(e) {
+				$.ajax({
+					url: elk_scripturl + '?action=admin;area=news;sa=notices;reset;idnotice=' + id + ';' + elk_session_var + '=' + elk_session_id + ';api;xml',
+					type: 'post',
+					dataType: 'json',
+					beforeSencreate_popupd: ajax_indicator(true)
+				})
+				.done(function(request) {
+					if (request.error)
+					{
+						alert(request.error);
+					}
+					else
+					{
+						alert(request.success);
+					}
+				})
+				.fail(function(request) {
+					alert(request);
+				})
+				.always(function() {
+					ajax_indicator(false);
+				});
+		}).addClass(width_class);
 	}
 }

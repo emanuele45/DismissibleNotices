@@ -179,4 +179,15 @@ class Dismissible_Notices
 
 		return $new;
 	}
+
+	public function reset($id)
+	{
+		$this->_db->query('', '
+			DELETE FROM {db_prefix}log_notices
+			WHERE id_notice = {int:to_reset}',
+			array(
+				'to_reset' => $id
+			)
+		);
+	}
 }
