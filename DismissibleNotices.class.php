@@ -41,6 +41,11 @@ class Dismissible_Notices
 			{
 				if (in_array($group, $show))
 				{
+					if (empty($id_member) && !empty($_SESSION['dismissible_notices'][$row['id_notice']]))
+					{
+						continue;
+					}
+
 					$row['positioning'] = (array) json_decode($row['positioning']);
 
 					if (empty($row['positioning']['element']))
@@ -101,22 +106,29 @@ class Dismissible_Notices
 
 	public function disableMemberNotice($id_notice, $id_member)
 	{
-		$this->_db->insert('ignore',
-			'{db_prefix}log_notices',
-			array(
-				'id_notice' => 'int',
-				'id_member' => 'int',
-				'dismissed' => 'int',
-			),
-			array(
-				$id_notice,
-				$id_member,
-				1
-			),
-			array(
-				'id_notice'
-			)
-		);
+		if(empty($id_member))
+		{
+			$_SESSION['dismissible_notices'][$id_notice] = false;
+		}
+		else
+		{
+			$this->_db->insert('ignore',
+				'{db_prefix}log_notices',
+				array(
+					'id_notice' => 'int',
+					'id_member' => 'int',
+					'dismissed' => 'int',
+				),
+				array(
+					$id_notice,
+					$id_member,
+					1
+				),
+				array(
+					'id_notice'
+				)
+			);
+		}
 	}
 
 	public function getAll($start, $per_page, $sort)
