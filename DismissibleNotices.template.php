@@ -35,7 +35,7 @@ function template_notices_above()
 			});
 		}, 500);', true);
 		echo '
-			<div class="' . $notice['class'] . '"">
+			<div class="' . $notice['class'] . '">
 				' . $notice['body'] . '<br />
 				<a href="' . $scripturl . '?action=dismissnotice;url=' . urlencode($_SERVER['REQUEST_URL']) . $txt['dismiss_notice_dismis'] . '">X</a>,
 			</div>';
