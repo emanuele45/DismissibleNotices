@@ -550,7 +550,7 @@ $(function() {
 
 }(window,document,jQuery));
 
-$.notify.addStyle('foo', {
+$.notify.addStyle('default', {
 	html: 
 		"<div>" +
 			"<div class='title' data-notify-html='title'/>" +
@@ -563,11 +563,11 @@ $.notify.addStyle('foo', {
 });
 
 //listen for click events from this style
-$(document).on('click', '.notifyjs-foo-base .no', function() {
+$(document).on('click', '.notifyjs-default-base .no', function() {
   //programmatically trigger propogating hide event
   $(this).trigger('notify-hide');
 });
-$(document).on('click', '.notifyjs-foo-base .yes', function() {
+$(document).on('click', '.notifyjs-default-base .yes', function() {
 	var $this = $(this),
 		id = parseInt($this.prev().text());
 

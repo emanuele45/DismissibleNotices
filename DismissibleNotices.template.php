@@ -27,7 +27,7 @@ function template_notices_above()
 				cancel: ' . JavaScriptEscape($txt['dismiss_notice_cancel']) . ',
 				id: ' . JavaScriptEscape($notice['id_notice']) . '
 			}, {
-				style: \'foo\',
+				style: \'default\',
 				className:  ' . javaScriptEscape($notice['class']) . ',
 				autoHide: ' . ($context['user']['is_guest'] ? 'true' : 'false') . ',
 				position: ' . javaScriptEscape(dismissnotices_translate_positions($notice['positioning']['position'])) . ',

@@ -4,34 +4,34 @@
 .notifyjs-corner .notifyjs-wrapper {
 	width: 100% !important;
 }
-.notifyjs-foo-base:after {
+.notifyjs-default-base:after {
 	content: '';
 	display: block;
 	clear: both;
 }
-.notifyjs-foo-base {
+.notifyjs-default-base {
 	background: palegreen;
 	padding: 5px;
 	border-radius: 10px;
 }
 
-.notifyjs-foo-base .title {
+.notifyjs-default-base .title {
 	margin: 10px 0 0 10px;
 	text-align: left;
 }
 
-.notifyjs-foo-base .buttons {
+.notifyjs-default-base .buttons {
 	text-align: center;
 	margin: 2px;
 }
 
-.notifyjs-foo-base button {
+.notifyjs-default-base button {
 	padding: 5px;
 	margin: 2px;
 	width: 60px;
 }
 
-.notifyjs-foo-base .id {
+.notifyjs-default-base .id {
 	display: none;
 }
 
