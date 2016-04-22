@@ -44,3 +44,35 @@
 #dismissnotice_reset.grid50 {
 	display: none;
 }
+.notifyjs-top-center {
+	top: 0px;
+	left: 45%;
+}
+.notifyjs-top-right {
+	top: 0px;
+	right: 0px;
+}
+.notifyjs-right-middle {
+	right: 0px;
+	top: 45%;
+}
+.notifyjs-bottom-right {
+	bottom: 0px;
+	right: 0px;
+}
+.notifyjs-bottom-center {
+	bottom: 0px;
+	left: 45%;
+}
+.notifyjs-bottom-left {
+	bottom: 0px;
+	left: 0px;
+}
+.notifyjs-left-middle {
+	left: 0px;
+	top: 45%
+}
+.notifyjs-top-left {
+	top: 0px;
+	left: 0px;
+}

@@ -323,7 +323,7 @@ Notification = (function() {
       } else {
         css[align] = 0;
       }
-      anchor.css(css).addClass("" + pluginClassName + "-corner");
+      anchor.css(css).addClass("" + pluginClassName + "-corner " + pluginClassName + "-" + main + "-" + align);
       $("body").append(anchor);
     }
     return anchor.prepend(this.wrapper);
