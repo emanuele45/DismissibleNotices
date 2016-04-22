@@ -72,7 +72,7 @@ class Dismissible_Notices
 		return $notices;
 	}
 
-	public function getNoticeById($id_notice)
+	public function getNoticeById($id_notice, $parse = true)
 	{
 		$request = $this->_db->query('', '
 			SELECT n.id_notice, n.body, n.class, n.expire, n.show_to, n.added, n.positioning
@@ -85,7 +85,12 @@ class Dismissible_Notices
 
 		$notice = $this->_db->fetch_assoc($request);
 		$this->_db->free_result($request);
-		$notice['body'] = parse_bbc($notice['body']);
+
+		if ($parse === true)
+		{
+			$notice['body'] = parse_bbc($notice['body']);
+		}
+
 		$notice['positioning'] = (array) json_decode($notice['positioning']);
 
 		if (empty($notice['positioning']['element']))
