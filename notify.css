@@ -34,6 +34,11 @@
 .notifyjs-default-base .id {
 	display: none;
 }
+.notifyjs-corner .notifyjs-wrapper,
+.notifyjs-corner .notifyjs-container {
+	margin-left: 0px !important;
+	margin-right: 0px !important;
+}
 
 #dismissnotice_box button {
 	display: inline-block;
@@ -45,32 +50,36 @@
 	display: none;
 }
 .notifyjs-top-center {
-	top: 0px;
-	left: 45%;
+	top: 0px !important;
+	left: 50% !important;
+	margin-left: -12.5% !important;
 }
 .notifyjs-top-right {
-	top: 0px;
-	right: 0px;
+	top: 0px !important;
+	right: 0px !important;
 }
 .notifyjs-right-middle {
-	right: 0px;
-	top: 45%;
+	right: 0px !important;
+	left: 50% !important;
+	margin-left: -12.5% !important;
 }
 .notifyjs-bottom-right {
-	bottom: 0px;
-	right: 0px;
+	bottom: 0px !important;
+	right: 0px !important;
 }
 .notifyjs-bottom-center {
-	bottom: 0px;
-	left: 45%;
+	bottom: 0px !important;
+	left: 50% !important;
+	margin-left: -12.5% !important;
 }
 .notifyjs-bottom-left {
-	bottom: 0px;
-	left: 0px;
+	bottom: 0px !important;
+	left: 0px !important;
 }
 .notifyjs-left-middle {
-	left: 0px;
-	top: 45%
+	left: 0px !important;
+	left: 50% !important;
+	margin-left: -12.5% !important;
 }
 .notifyjs-top-left {
 	top: 0px;
