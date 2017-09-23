@@ -18,7 +18,7 @@
 	<install for="1.0.5 - 1.0.99">
 		<require-file name="DismissibleNotices.integrate.php" destination="SUBSDIR" />
 		<require-file name="DismissibleNotices.class.php" destination="SUBSDIR" />
-		<require-file name="DismissibleNotices.controller.php" destination="CONTROLLERDIR" />
+		<require-file name="Dismissnotice.controller.php" destination="CONTROLLERDIR" />
 		<require-file name="ManageDismissnotice.controller.php" destination="ADMINDIR" />
 		<require-file name="DismissibleNotices.template.php" destination="THEMEDIR" />
 		<require-file name="DismissibleNotices.english.php" destination="LANGUAGEDIR/english" />
@@ -32,7 +32,7 @@
 	<uninstall for="1.0.5 - 1.0.99">
 		<remove-file name="SUBSDIR/DismissibleNotices.integrate.php" />
 		<remove-file name="SUBSDIR/DismissibleNotices.class.php" />
-		<remove-file name="CONTROLLERDIR/DismissibleNotices.controller.php" />
+		<remove-file name="CONTROLLERDIR/Dismissnotice.controller.php" />
 		<remove-file name="ADMINDIR/ManageDismissnotice.controller.php" />
 		<remove-file name="THEMEDIR/DismissibleNotices.template.php" />
 		<remove-file name="LANGUAGEDIR/english/DismissibleNotices.english.php" />
