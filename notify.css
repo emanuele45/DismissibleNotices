@@ -60,8 +60,6 @@
 }
 .notifyjs-right-middle {
 	right: 0px !important;
-	left: 50% !important;
-	margin-left: -12.5% !important;
 }
 .notifyjs-bottom-right {
 	bottom: 0px !important;
@@ -78,8 +76,6 @@
 }
 .notifyjs-left-middle {
 	left: 0px !important;
-	left: 50% !important;
-	margin-left: -12.5% !important;
 }
 .notifyjs-top-left {
 	top: 0px;
