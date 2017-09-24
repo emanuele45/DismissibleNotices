@@ -18,7 +18,7 @@ class Dismissible_Notices
 		$this->_db = database();
 	}
 
-	public function getMemberNotices($id_member, $groups)
+	public function getMemberNotices($id_member, $name, $groups)
 	{
 		$request = $this->_db->query('', '
 			SELECT n.id_notice, n.body, n.class, n.expire, n.show_to, n.positioning
@@ -46,22 +46,9 @@ class Dismissible_Notices
 						continue;
 					}
 
-					$row['positioning'] = (array) json_decode($row['positioning']);
+					$row['positioning'] = $this->determinePositioning($row['positioning']);
+					$row['body'] = $this->prepareBody($row['body'], $name);
 
-					if (empty($row['positioning']['element']))
-					{
-						$row['positioning']['element'] = 'global';
-					}
-					if (empty($row['positioning']['position']))
-					{
-						$row['positioning']['position'] = 0;
-					}
-					if (empty($row['positioning']['element_name']))
-					{
-						$row['positioning']['element_name'] = '';
-					}
-
-					$row['body'] = parse_bbc($row['body']);
 					$notices[] = $row;
 					break;
 				}
@@ -70,6 +57,32 @@ class Dismissible_Notices
 		$this->_db->free_result($request);
 
 		return $notices;
+	}
+
+	protected function prepareBody($body, $name)
+	{
+		$body = str_replace('{user_name}', $name, $body);
+		$body = replaceBasicActionUrl($body);
+		return parse_bbc($body);
+	}
+
+	protected function determinePositioning($positioning)
+	{
+		$positioning = (array) json_decode($positioning);
+
+		if (empty($positioning['element']))
+		{
+			$positioning['element'] = 'global';
+		}
+		if (empty($positioning['position']))
+		{
+			$positioning['position'] = 0;
+		}
+		if (empty($positioning['element_name']))
+		{
+			$positioning['element_name'] = '';
+		}
+		return $positioning;
 	}
 
 	public function getNoticeById($id_notice, $parse = true)

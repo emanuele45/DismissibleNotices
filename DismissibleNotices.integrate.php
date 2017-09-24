@@ -17,9 +17,10 @@ class Dismissible_Notices_Integrate
 {
 	public static function integrate_load_theme()
 	{
-		global $user_info;
+		global $user_info, $txt;
 
-		$notices = self::getNotices($user_info['id'], $user_info['groups']);
+		$name = $user_info['is_guest'] ? $txt['guest_title'] : $user_info['name'];
+		$notices = self::getNotices($user_info['id'], $name, $user_info['groups']);
 
 		if (!empty($notices))
 			self::buildTemplate($notices);
@@ -65,12 +66,12 @@ class Dismissible_Notices_Integrate
 		$context['notices'] = $notices;
 	}
 
-	protected static function getNotices($id_member, $groups)
+	protected static function getNotices($id_member, $name, $groups)
 	{
 		require_once(SUBSDIR . '/DismissibleNotices.class.php');
 		$notice = new Dismissible_Notices();
 
-		return $notice->getMemberNotices($id_member, $groups);
+		return $notice->getMemberNotices($id_member, $name, $groups);
 	}
 
 	public static function disableNotice($id_notice)
