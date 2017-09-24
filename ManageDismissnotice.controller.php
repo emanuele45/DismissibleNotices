@@ -46,7 +46,6 @@ class Manage_Dismissnotice_Controller extends Action_Controller
 		$modSettings['jquery_include_ui'] = true;
 		loadCSSFile('dism/jquery.ui.theme.css');
 		loadCSSFile('dism/jquery.ui.datepicker.css');
-		loadCSSFile('dism/jquery.ui.d.theme.css');
 		loadCSSFile('dism/jquery.ui.core.css');
 
 		$possible_locals = array($txt['lang_locale']);
