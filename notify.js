@@ -678,8 +678,8 @@ function dismissnotice_editable()
 			width_class = 'grid33';
 		}
 
-		$('#dismissnotice_reset').addClass(width_class)
-		$('#dismissnotice_submit').click(function(){
+		$popup.find('#dismissnotice_reset').addClass(width_class)
+		$popup.find('#dismissnotice_submit').click(function(){
 				var $form = $(this).closest('#dismissnotice_box'),
 					inputs = {};
 				$form.find('input,textarea').each(function(index, value) {
@@ -726,7 +726,7 @@ function dismissnotice_editable()
 				});
 		}).addClass(width_class);
 
-		$('#dismissnotice_cancel').on('click', function(e) {
+		$popup.find('#dismissnotice_cancel').on('click', function(e) {
 			$popup.slideUp(function() {
 				if (typeof cancel_callback != 'undefined') {
 					cancel_callback();
@@ -736,7 +736,7 @@ function dismissnotice_editable()
 			});
 		}).addClass(width_class);
 
-		$('#dismissnotice_reset').on('click', function(e) {
+		$popup.find('#dismissnotice_reset').on('click', function(e) {
 				$.ajax({
 					url: elk_scripturl + '?action=admin;area=news;sa=notices;reset;idnotice=' + id + ';' + elk_session_var + '=' + elk_session_id + ';api;xml',
 					type: 'post',
