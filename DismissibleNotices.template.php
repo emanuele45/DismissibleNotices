@@ -30,6 +30,7 @@ function template_notices_above()
 				style: \'default\',
 				className:  ' . javaScriptEscape($notice['class']) . ',
 				autoHide: ' . ($context['user']['is_guest'] ? 'true' : 'false') . ',
+				autoHideDelay: 15000,
 				position: ' . javaScriptEscape(dismissnotices_translate_positions($notice['positioning']['position'])) . ',
 				clickToHide: false
 			});
