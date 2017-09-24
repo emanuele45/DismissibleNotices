@@ -618,8 +618,17 @@ function dismissnotice_editable()
 	$('#dismissnotice_new').on('click', function(e) {
 		e.preventDefault();
 
-		var id = $('#list_dismissible_notices tr:last .dismissnotice_editable').data('idnotice'),
-			$row = $('#list_dismissible_notices .editable_' + id);
+		var id = $('#list_dismissible_notices tr:last .dismissnotice_editable').data('idnotice');
+		if (typeof id == 'undefined')
+		{
+			id = 'tr';
+		}
+		else
+		{
+			id = '.editable_' + id;
+		}
+
+		$row = $('#list_dismissible_notices ' + id);
 
 		$.ajax({
 			url: elk_scripturl + '?action=admin;area=news;sa=notices;new;' + elk_session_var + '=' + elk_session_id + ';api;xml',
