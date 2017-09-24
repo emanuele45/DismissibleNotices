@@ -85,3 +85,21 @@
 	top: 0px;
 	left: 0px;
 }
+
+.notifyjs-default-alert {
+	background: #4B863C linear-gradient(to bottom, #5BA048, #3D6E32);
+	color: white;
+	font-size: 150%;
+}
+.notifyjs-default-alert .title {
+	text-align: center;
+	padding-bottom: 10px;
+}
+.notifyjs-default-alert .buttons {
+	font-size: 66%;
+}
+.notifyjs-corner {
+	width: 75%;
+	left: 50% !important;
+	margin-left: -37.5% !important;
+}
